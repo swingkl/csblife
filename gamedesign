@@ -1,0 +1,11 @@
+from http://gamedev.stackexchange.com/questions/15083/how-to-emulate-psxs-graphics-with-opengl
+
+How to emulate PSX's graphics with OpenGL?
+
+I want to know what options (or shaders) to set so that my OpenGL game looks like Playstation 1 game. I know it probably can not be achieved 100 % because PSX used television and television renders differently that monitor
+
+In my opinion, the most important bits to make an OpenGL scene look like a PSX scene would be to make sure the filtering is turned off (PS1 only had nearest neighbour), and turn off Z buffering (there wasn't any) and render your scene with painters algorithm.
+
+The lighting was only per vertex, in fact there actually wasn't any lighting hardware only gouraud shaded vertex colouring. The lighting was software driven so you could do anything within the limitations of the CPU time, of which there wasn't much spare for clever advanced things like "lighting". :) We managed to get specular at one point, but as it was per vertex it made the scene look sparkley so we dropped it. We never managed to get specular to work with skinned meshes as blending normals and then using them just took too much time.
+
+The PS1 also had a bit of texture swim, I'm not sure how you'd implement that with OpenGL, but if you're after an authentic experience, maybe just trying to make the UVs breakdown when they're near the screen edge would give a reasonable approximation.
